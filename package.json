@@ -1,0 +1,20 @@
+{
+  "name": "dess-comms-checker",
+  "version": "1.0.0",
+  "description": "AI agent that checks and refines DESS parent communications against the Communication Checker Guidelines",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "start": "node server.js",
+    "check": "node cli.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.133.0",
+    "docx": "^9.11.0",
+    "jszip": "^3.10.2"
+  }
+}

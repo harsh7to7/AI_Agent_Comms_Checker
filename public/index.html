@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DESS Comms Checker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">DESS</span>
+      <div>
+        <h1>Comms Checker</h1>
+        <p>Checks parent messages against the Communication Checker Guidelines and refines them before they go to the DESS App.</p>
+      </div>
+    </div>
+    <div class="status" id="status">Connecting…</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel input" aria-labelledby="input-h">
+      <h2 id="input-h">1. Your message</h2>
+
+      <label class="drop" id="drop">
+        <input type="file" id="file" accept=".docx">
+        <strong>Upload the Word template (.docx)</strong>
+        <span id="file-name">or drag it here – fonts, colours and links are checked too</span>
+      </label>
+      <p class="or">or paste your message below</p>
+
+      <div class="field">
+        <label for="title">Title <span class="count" id="title-count">0/50</span></label>
+        <input id="title" maxlength="200" placeholder="e.g. Y5 Science Museum Trip">
+      </div>
+      <div class="field">
+        <label for="desc">Short description <span class="count" id="desc-count">0/50</span></label>
+        <input id="desc" maxlength="200" placeholder="e.g. Wednesday, 7th January">
+      </div>
+      <div class="field">
+        <label for="body">Body of the text</label>
+        <textarea id="body" rows="14" placeholder="Paste the message body here. Use **bold**, - bullets and [HERE](link) if you like."></textarea>
+      </div>
+
+      <h2>2. Request details</h2>
+      <div class="grid">
+        <div class="field">
+          <label for="school">School</label>
+          <select id="school">
+            <option value="oud-metha">DESS Oud Metha</option>
+            <option value="academic-city">DESS Academic City</option>
+            <option value="college">DESS College</option>
+            <option value="all">All DESS schools</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="audience">Who is it for?</label>
+          <select id="audience">
+            <option value="whole-school">Whole school</option>
+            <option value="year-group">Full year group</option>
+            <option value="class">Full class / form / set</option>
+            <option value="selected">Selected students</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="send">Send date</label>
+          <input type="date" id="send">
+        </div>
+        <div class="field">
+          <label for="archive">Archive date</label>
+          <input type="date" id="archive">
+        </div>
+      </div>
+      <label class="check"><input type="checkbox" id="teacher"> Sent from an individual teacher (sign-off allowed)</label>
+      <label class="check"><input type="checkbox" id="use-ai" checked> Refine with AI</label>
+
+      <button class="primary" id="run">Check &amp; refine</button>
+      <p class="progress" id="progress" aria-live="polite"></p>
+    </section>
+
+    <section class="panel results" id="results" aria-labelledby="results-h" hidden>
+      <h2 id="results-h" class="sr-only">Results</h2>
+      <div class="verdict" id="verdict"></div>
+
+      <div class="tabs" role="tablist">
+        <button role="tab" aria-selected="true" data-tab="refined">Refined message</button>
+        <button role="tab" aria-selected="false" data-tab="issues">Issues <span class="pill" id="issue-count"></span></button>
+        <button role="tab" aria-selected="false" data-tab="checklist">Before you submit</button>
+      </div>
+
+      <div class="tab" id="tab-refined">
+        <div class="actions">
+          <button id="copy">Copy text</button>
+          <button id="download">Download .docx</button>
+          <label class="check inline"><input type="checkbox" id="show-diff"> Show changes</label>
+        </div>
+        <article class="preview" id="preview"></article>
+        <div id="questions"></div>
+        <div id="remaining"></div>
+      </div>
+
+      <div class="tab" id="tab-issues" hidden></div>
+
+      <div class="tab" id="tab-checklist" hidden>
+        <p class="muted">These can't be checked automatically. Tick each one before you send the Communication Request Form.</p>
+        <ul class="manual" id="manual"></ul>
+      </div>
+    </section>
+
+    <section class="panel empty" id="empty">
+      <h2>What gets checked</h2>
+      <ul class="what">
+        <li><b>Title and description</b> – 50 characters, different, no “&amp;”, year group first</li>
+        <li><b>Dates and times</b> – “Thursday, 6th November”, “7.45am”, weekday matches date, not in the past</li>
+        <li><b>House style</b> – “at” not “@”, single spaces, no caps, no emojis, AED3000, British English</li>
+        <li><b>School names</b> – no DOM/DAC, children vs students</li>
+        <li><b>Links</b> – on the word HERE, PDFs only, no QR codes</li>
+        <li><b>Personalisation</b> – merge fields instead of “your child”</li>
+        <li><b>Formatting</b> – Montserrat, black only, one font size, bold key details</li>
+        <li><b>Scheduling</b> – 48 hours’ notice, no Fridays, archive the day after the event</li>
+        <li><b>Spelling, grammar and tone</b> – AI edit in the comms team’s style</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
