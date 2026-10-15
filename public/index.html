@@ -4,33 +4,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>DESS Comms Checker</title>
+  <meta name="theme-color" content="#34565b">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/webp" href="/dess-logo.webp">
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <header class="top">
-    <div class="brand">
-      <img class="mark" src="/dess-logo.webp" alt="DESS" width="300" height="378">
-      <div>
-        <h1>Comms Checker</h1>
-        <p>Checks parent messages against the Communication Checker Guidelines and refines them before they go to the DESS App.</p>
+    <div class="top-inner">
+      <div class="brand">
+        <img class="mark" src="/dess-logo.webp" alt="DESS" width="300" height="378">
+        <div>
+          <p class="eyebrow">Marketing &amp; Communications</p>
+          <h1>Comms Checker</h1>
+          <p class="lede">Check a parent message against the Communication Checker Guidelines and get a refined version ready for the DESS App.</p>
+        </div>
       </div>
+      <div class="status" id="status">Connecting…</div>
     </div>
-    <div class="status" id="status">Connecting…</div>
   </header>
 
   <main class="layout">
     <section class="panel input" aria-labelledby="input-h">
-      <h2 id="input-h">1. Your message</h2>
+      <h2 class="step" id="input-h"><span class="step-n" aria-hidden="true">1</span>Your message</h2>
 
       <label class="drop" id="drop">
         <input type="file" id="file" accept=".docx">
+        <svg class="drop-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3-3 3 3"/></svg>
         <strong>Upload the Word template (.docx)</strong>
         <span id="file-name">or drag it here – fonts, colours and links are checked too</span>
       </label>
-      <p class="or">or paste your message below</p>
+      <p class="or"><span>or paste your message</span></p>
 
       <div class="field">
         <label for="title">Title <span class="count" id="title-count">0/50</span></label>
@@ -45,7 +51,7 @@
         <textarea id="body" rows="14" placeholder="Paste the message body here. Use **bold**, - bullets and [HERE](link) if you like."></textarea>
       </div>
 
-      <h2>2. Request details</h2>
+      <h2 class="step"><span class="step-n" aria-hidden="true">2</span>Request details</h2>
       <div class="grid">
         <div class="field">
           <label for="school">School</label>
@@ -74,8 +80,10 @@
           <input type="date" id="archive">
         </div>
       </div>
-      <label class="check"><input type="checkbox" id="teacher"> Sent from an individual teacher (sign-off allowed)</label>
-      <label class="check"><input type="checkbox" id="use-ai" checked> Refine with AI</label>
+      <div class="options">
+        <label class="check"><input type="checkbox" id="teacher"> Sent from an individual teacher (sign-off allowed)</label>
+        <label class="check"><input type="checkbox" id="use-ai" checked> Refine with AI</label>
+      </div>
 
       <button class="primary" id="run">Check &amp; refine</button>
       <p class="progress" id="progress" aria-live="polite"></p>
@@ -97,7 +105,14 @@
           <button id="download">Download .docx</button>
           <label class="check inline"><input type="checkbox" id="show-diff"> Show changes</label>
         </div>
-        <article class="preview" id="preview"></article>
+        <div class="app-card">
+          <div class="app-bar">
+            <img src="/dess-logo.webp" alt="" width="300" height="378">
+            <span>DESS App</span>
+            <em>How parents will see it</em>
+          </div>
+          <article class="preview" id="preview"></article>
+        </div>
         <div id="questions"></div>
         <div id="remaining"></div>
       </div>
@@ -110,21 +125,27 @@
       </div>
     </section>
 
-    <section class="panel empty" id="empty">
-      <h2>What gets checked</h2>
+    <section class="panel empty" id="empty" aria-labelledby="empty-h">
+      <p class="eyebrow">Guidelines 21.9.26</p>
+      <h2 id="empty-h">What gets checked</h2>
+      <p class="muted intro">Every message is checked against the guideline rules, then edited in the comms team's style. Each finding cites its guideline number.</p>
       <ul class="what">
-        <li><b>Title and description</b> – 50 characters, different, no “&amp;”, year group first</li>
-        <li><b>Dates and times</b> – “Thursday, 6th November”, “7.45am”, weekday matches date, not in the past</li>
-        <li><b>House style</b> – “at” not “@”, single spaces, no caps, no emojis, AED3000, British English</li>
-        <li><b>School names</b> – no DOM/DAC, children vs students</li>
-        <li><b>Links</b> – on the word HERE, PDFs only, no QR codes</li>
-        <li><b>Personalisation</b> – merge fields instead of “your child”</li>
-        <li><b>Formatting</b> – Montserrat, black only, one font size, bold key details</li>
-        <li><b>Scheduling</b> – 48 hours’ notice, no Fridays, archive the day after the event</li>
-        <li><b>Spelling, grammar and tone</b> – AI edit in the comms team’s style</li>
+        <li><b>Title and description</b><span>50 characters, different, no “&amp;”, year group first</span></li>
+        <li><b>Dates and times</b><span>“Thursday, 6th November”, “7.45am”, weekday matches date, not in the past</span></li>
+        <li><b>House style</b><span>“at” not “@”, single spaces, no caps, no emojis, AED3000, British English</span></li>
+        <li><b>School names</b><span>No DOM/DAC, children vs students</span></li>
+        <li><b>Links</b><span>On the word HERE, PDFs only, no QR codes</span></li>
+        <li><b>Personalisation</b><span>Merge fields instead of “your child”</span></li>
+        <li><b>Formatting</b><span>Montserrat, black only, one font size, bold key details</span></li>
+        <li><b>Scheduling</b><span>48 hours’ notice, no Fridays, archive the day after the event</span></li>
+        <li><b>Spelling, grammar and tone</b><span>AI edit in the comms team’s style</span></li>
       </ul>
     </section>
   </main>
+
+  <footer class="foot">
+    <p>Dubai English Speaking School · Marketing &amp; Communications · Final approval still sits with your SLT member and the comms team.</p>
+  </footer>
 
   <script src="/app.js" type="module"></script>
 </body>
