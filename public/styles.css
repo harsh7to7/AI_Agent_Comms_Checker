@@ -32,10 +32,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   padding: 18px 28px; background: var(--card); border-bottom: 3px solid var(--red);
 }
 .brand { display: flex; gap: 14px; align-items: center; }
-.mark {
-  background: var(--red); color: #fff; font-weight: 700; letter-spacing: .5px;
-  padding: 8px 10px; border-radius: 6px; font-size: 15px;
-}
+.mark { height: 56px; width: auto; flex-shrink: 0; }
 .brand h1 { margin: 0; font-size: 20px; }
 .brand p { margin: 2px 0 0; color: var(--muted); font-size: 13px; max-width: 640px; }
 .status { font-size: 12px; padding: 6px 10px; border-radius: 99px; background: var(--bg); white-space: nowrap; }

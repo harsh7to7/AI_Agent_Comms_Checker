@@ -14,8 +14,8 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PORT = Number(process.env.PORT) || 3000;
 const MAX_BODY = 15 * 1024 * 1024;
 
-const STATIC = { '/': 'index.html', '/app.js': 'app.js', '/styles.css': 'styles.css' };
-const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8' };
+const STATIC = { '/': 'index.html', '/app.js': 'app.js', '/styles.css': 'styles.css', '/dess-logo.webp': 'dess-logo.webp' };
+const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.webp': 'image/webp' };
 
 function readBody(req) {
   return new Promise((resolve, reject) => {
